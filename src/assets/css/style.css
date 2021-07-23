@@ -21942,7 +21942,7 @@ a:hover {
 }
 
 .chat-main li .chat-box .details {
-	padding-left: 75px;
+
 	padding-right: 50px;
 	padding-top: 12px;
 	padding-bottom: 13px
@@ -41553,7 +41553,6 @@ footer .footer-mobile-title {
 	.contact-log-main li .chat-box .details,
 	.contact-log-main li .call-box .details,
 	.contact-log-main li .contact-box .details {
-		padding-left: 60px;
 		padding-right: 50px
 	}
 	.chat .profile {

@@ -1,29 +1,60 @@
-import React from 'react';
+import React, {useState} from 'react';
 import socket from "../../socket";
 
 import landingLogo from "../../assets/images/logo/landing-logo.png";
 import cloudLogo from "../../assets/images/login_signup/2.png";
+import axios from "axios";
 
-const Join = () => {
+const Join = ({ onLogin }) => {
+    const [roomId, setRoomId] = useState('');
+    const [userName, setUserName] = useState('');
+    const [isLoading, setLoading] = useState(false);
+
+    const onEnter = async () => {
+        if (!roomId || !userName) {
+            return alert('123');
+        }
+        const obj = {
+            roomId,
+            userName
+        };
+        setLoading(true);
+        await axios.post('/rooms', obj);
+        onLogin(obj);
+    }
+
     return (
         <div className="login-page2 animat-rate">
             <div className="login-content-main">
                 <div className="login-content">
                     <div className="login-content-header"><img className="img-fluid" src={landingLogo} alt="images"/>
                     </div>
-                    <h3>Hello Everyone , We are Chitchat</h3>
-                    <h4>Wellcome to chitchat please, login to your account.</h4>
+                    <h4>Пожалуйста, авторизуйтесь.</h4>
                     <form className="form2">
                         <div className="form-group">
                             <label className="col-form-label" htmlFor="inputEmail3">Room ID</label>
-                            <input className="form-control" type="text" placeholder="Введите Room ID"/>
+                            <input
+                                value={roomId}
+                                onChange={e => setRoomId(e.target.value)}
+                                className="form-control"
+                                type="text"
+                                placeholder="Введите Room ID"/>
                         </div>
                         <div className="form-group">
                             <label className="col-form-label" htmlFor="inputPassword3">Ваше имя</label><span> </span>
-                            <input className="form-control" type="text" placeholder="Введите Ваше имя"/>
+                            <input
+                                value={userName}
+                                onChange={e => setUserName(e.target.value)}
+                                className="form-control"
+                                type="text"
+                                placeholder="Введите Ваше имя"/>
                         </div>
                         <div className="form-group mb-0">
-                            <div className="buttons"><a className="btn button-effect btn-primary" href="#">Войти</a></div>
+                            <div className="buttons">
+                                <button disabled={isLoading} onClick={onEnter} className="btn button-effect btn-primary">
+                                    {isLoading ? 'Вход...': 'Войти'}
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
