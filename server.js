@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server, {cors: {origin: "https://testdeveloper-litechat.herokuapp.com/"}});
+const io = require('socket.io')(server, {cors: {origin: "/"}});
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
