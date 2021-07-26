@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import socket from "../../socket";
 
 import landingLogo from "../../assets/images/logo/landing-logo.png";
 import cloudLogo from "../../assets/images/login_signup/2.png";
@@ -11,14 +12,14 @@ const Join = ({ onLogin }) => {
 
     const onEnter = async () => {
         if (!roomId || !userName) {
-            return alert('Заполните все поля');
+            return alert('123');
         }
         const obj = {
             roomId,
             userName
         };
         setLoading(true);
-        await axios.post('/litechat/rooms', obj);
+        await axios.post('/rooms', obj);
         onLogin(obj);
     }
 

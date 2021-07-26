@@ -2,14 +2,14 @@ const express = require('express');
 
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server, {cors: {origin: "/"}});
+const io = require('socket.io')(server, {cors: {origin: "http://localhost:3000"}});
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 const rooms = new Map();
 
-app.get('/litechat/rooms/:id', (request, response) => {
+app.get('/rooms/:id', (request, response) => {
     const roomId = request.params.id;
     const obj = rooms.has(roomId) ? {
         users: [...rooms.get(roomId).get('users').values()],
@@ -18,7 +18,7 @@ app.get('/litechat/rooms/:id', (request, response) => {
     response.json(obj);
 });
 
-app.post('/litechat/rooms', (request, response) => {
+app.post('/rooms', (request, response) => {
     const {roomId, userName} = request.body;
     if (!rooms.has(roomId)) {
         rooms.set(roomId, new Map([
