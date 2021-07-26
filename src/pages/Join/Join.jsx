@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import socket from "../../socket";
 
 import landingLogo from "../../assets/images/logo/landing-logo.png";
 import cloudLogo from "../../assets/images/login_signup/2.png";
@@ -12,7 +11,7 @@ const Join = ({ onLogin }) => {
 
     const onEnter = async () => {
         if (!roomId || !userName) {
-            return alert('123');
+            return alert('Заполните все поля');
         }
         const obj = {
             roomId,
