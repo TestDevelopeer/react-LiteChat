@@ -18,7 +18,7 @@ const Join = ({ onLogin }) => {
             userName
         };
         setLoading(true);
-        await axios.post('/rooms', obj);
+        await axios.post('rooms', obj);
         onLogin(obj);
     }
 

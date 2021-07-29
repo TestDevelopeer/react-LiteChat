@@ -20,7 +20,7 @@ function App() {
             payload: obj
         });
         socket.emit('ROOM:JOIN', obj);
-        const {data} = await axios.get(`/rooms/${obj.roomId}`);
+        const {data} = await axios.get(`rooms/${obj.roomId}`);
         dispatch({
             type: 'SET_DATA',
             payload: data
@@ -46,10 +46,9 @@ function App() {
         socket.on('ROOM:NEW_MESSAGE', addMessage);
     }, []);
 
-    return (
-        <div className="App">
-            {!state.joined ? <Join onLogin={onLogin}/> : <Chat {...state} onAddMessage={addMessage} />}
-        </div>
+    return (<>
+        {!state.joined ? <Join onLogin={onLogin}/> : <Chat {...state} onAddMessage={addMessage} />}
+        </>
     );
 }
 
